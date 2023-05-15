@@ -28,12 +28,12 @@ def menu():
 
         if choice == "1":
             to_fill = read_number("How many liters of gas to fill up? ")
-            TODO = fill(TODO)
+            gas = fill(tank_size, to_fill, gas)
 
         elif choice == "2":
             new_x = read_number("x: ")
             new_y = read_number("y: ")
-            TODO = drive(TODO)
+            TODO = drive(x, y, new_x, new_y, gas, gas_consumption)
 
         elif choice == "3":
             break
@@ -55,9 +55,14 @@ def fill(gasTankSize, gasToBeFilled, gasCurrently):
     The function does not print anything and does not ask for any
     input.
     """
-    
-
-    TODO
+    if (gasToBeFilled + gasCurrently) > gasTankSize:
+        
+        gasCurrently = gasTankSize
+        
+    else:
+        gasCurrently += gasToBeFilled
+        
+    return gasCurrently
 
 
 def drive(curX, curY, destX, destY, gasCurrently, carConsumption):
@@ -81,7 +86,12 @@ def drive(curX, curY, destX, destY, gasCurrently, carConsumption):
     input.
     """
     
-    calculateDistance(curX, curY, destX, destY)
+    distance = calculateDistance(curX, curY, destX, destY)
+    
+    range = gasCurrently / carConsumption
+    
+    if (distance > range):
+        
 
     # It might be usefull to make one or two assisting functions
     # to help the implementation of this function.
